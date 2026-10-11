@@ -1,0 +1,13 @@
+class Solution {
+    public int[] countBits(int n) {
+        int[] ans = new int[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            // Remove the last binary bit using i / 2.
+            // If i is odd, its last bit is 1, so add 1.
+            ans[i] = ans[i / 2] + (i % 2);
+        }
+
+        return ans;
+    }
+}
