@@ -1,0 +1,24 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+
+        // Initialize all amounts as impossible
+        Arrays.fill(dp, amount + 1);
+
+        // Zero coins are needed to make amount 0
+        dp[0] = 0;
+
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+
+                // Use this coin if it does not exceed the amount
+                if (coin <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+
+        // If amount is still impossible, return -1
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+}
