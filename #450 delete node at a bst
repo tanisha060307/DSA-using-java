@@ -1,0 +1,28 @@
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root==null){
+            return null; //base case
+        }
+        if (key<root.val){
+            root.left = deleteNode(root.left, key);
+        } //search in left subtree
+        else if (key>root.val){
+            root.right = deleteNode(root.right, key);
+        } //search in right subtree
+        else{ //node found
+            if (root.left==null){
+                return root.right;
+            } //case 1 no left child
+            if (root.right==null){
+                return root.left;
+            } //case 2 no right child
+            TreeNode successor = root.right;
+            while(successor.left!=null){
+                successor = successor.left;
+            }
+            root.val = successor.val;
+            root.right = deleteNode(root.right, successor.val);
+        }
+            return root;
+    }
+}
